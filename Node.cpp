@@ -1,60 +1,48 @@
 #include <iostream>
-#include "node.h"
+#include <cstring>
+#include "Node.h"
 
-Node::Node(char* setOp) { //constructor
+using namespace std;
+
+//Constructor
+Node::Node(char* newVal) {
+  val = new char[strlen(newVal)+1];
+  strcpy(val, newVal);
   next = NULL;
-  back = NULL;
-  front = NULL;
-  op = setOp;
+  right = NULL;
+  left = NULL;
 }
 
-Node::~Node() { //Node destructor
-  
+//gets the value of the node
+char* Node:: getVal(){
+  return val;
+}
+//sets the next value of the node
+void Node::setNext(Node* newNext){
+  next = newNext;
 }
 
-
-void Node::setFront(Node * newFront) { //set the input to front node for the binary tree
-  front = newFront;
+//gets the next value of the node
+Node* Node::getNext(){
+  return next;
 }
 
-void Node::setBack(Node * newBack) { //set input to back node for the binary tree
-  back = newBack;
+//Getters and setters for right and left nodes 
+void Node::setRight(Node* newRight){
+  right = newRight;
+}
+Node* Node::getRight(){
+  return right;
+}
+void Node::setLeft(Node* newLeft){
+  left = newLeft;
+}
+Node* Node::getLeft(){
+  return left;
 }
 
-Node * Node::getFront() { //Returns the front node of the binary tree
-  return front;
-}
-
-Node * Node::getBack() { //Returns the back node of the binary tree
-  return back;
-}
-
-bool Node::isBack() {
-  if (back != NULL) {//if there is a back node return true
-    return true;
-  }
-  else {
-    return false;
-  }
-}
-
-bool Node::isFront() {
-  if (front != NULL) {//if there is a front node return true
-    return true;
-  }
-  else {
-    return false;
-  }
-}
-
-void Node::setNext(Node* newNext) {
-  next = newNext;//set next to input
-}
-
-Node* Node::getNext() {
-  return next;//return next node
-}
-
-char* Node::getOp() { //Returns the operator or number in the queue
-  return op;
+//deconstructor
+Node::~Node(){
+  delete[] val;
+  next = NULL;
 }
